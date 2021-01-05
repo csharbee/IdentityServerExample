@@ -26,7 +26,12 @@ namespace ExampleIdentityServer.API1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
+            {
+                opt.Authority = "https://localhost:5001"; // Token'ý daðýtacak kaynak belirtilir. Yetkiliden API public key alacak 
+                                                          // daha sonra private key ile imzalanmýþ token'ý public key ile doðrulayacak
+                opt.Audience = "resourceApi1"; // gelen token'ýn aut property'sinde olmasý gereken deðeri set ediyoruz. 
+            });
             services.AddControllers();
         }
 
@@ -41,8 +46,8 @@ namespace ExampleIdentityServer.API1
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseAuthentication(); // kimlik doðrulama
+            app.UseAuthorization();  // kimlik yektilendirme
 
             app.UseEndpoints(endpoints =>
             {

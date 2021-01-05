@@ -1,9 +1,9 @@
-IdentityServer -> "https://localhost:5001
+IdentityServer -> "https://localhost:5001"
 
-Client1 -> "https://localhost:5003
+Client1 -> "https://localhost:5003"
 
-Client1 -> "https://localhost:5005
+Client1 -> "https://localhost:5005"
 
-API1 -> "https://localhost:5007
+API1 -> "https://localhost:5007"
 
-API2 -> "https://localhost:5009
+API2 -> "https://localhost:5009"
